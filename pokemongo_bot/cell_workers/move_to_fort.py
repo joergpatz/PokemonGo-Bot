@@ -2,18 +2,13 @@ from pokemongo_bot import logger
 from pokemongo_bot.constants import Constants
 from pokemongo_bot.step_walker import StepWalker
 from pokemongo_bot.worker_result import WorkerResult
+from pokemongo_bot.cell_workers.base_task import BaseTask
 from utils import distance, format_dist, fort_details
 
 
-class MoveToFortWorker(object):
-
-    def __init__(self, bot):
-        self.bot = bot
-
+class MoveToFort(BaseTask):
     def should_run(self):
-        return (self.bot.config.forts_spin and \
-         self.bot.config.forts_move_to_spin and \
-         self.bot.has_space_for_loot()) or self.bot.softban
+        return (self.bot.has_space_for_loot()) or self.bot.softban
 
     def work(self):
         if not self.should_run():
@@ -29,7 +24,7 @@ class MoveToFortWorker(object):
         fortID = nearest_fort['id']
         details = fort_details(self.bot, fortID, lat, lng)
         fort_name = details.get('name', 'Unknown').encode('utf8', 'replace')
-        
+
         unit = self.bot.config.distance_unit  # Unit to use when printing formatted distance
 
         dist = distance(
