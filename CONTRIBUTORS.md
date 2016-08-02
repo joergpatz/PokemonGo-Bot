@@ -42,4 +42,10 @@
  * SpaceWhale
  * klingan
  * reddivision
+ * DayBr3ak
  * kbinani
+ * MFizz
+ * NamPNQ
+ * z4ppy.bbc
+ * matheussampaio
+ * Abraxas000
